@@ -39,6 +39,10 @@ class Tasks extends React.Component {
         this.setState({ tasks: [] });
     }
 
+    handleStatusChange = (id) => {
+        alert(id);
+    }
+
     render() {
         return (
             <div className="tasks">
@@ -47,7 +51,10 @@ class Tasks extends React.Component {
                     {this.state.tasks.map(
                         (task, index) => {
                             return (
-                                <Task key={index} task={task} />
+                                <Task
+                                    key={index}
+                                    task={task}
+                                    handleStatusChange={this.handleStatusChange} />
                             );
                         }
                     )}
