@@ -1,0 +1,35 @@
+$titleColor: #6b705c;
+
+header {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: solid;
+    border-width: 1px;
+    border-color: $titleColor;
+    padding: 5px;
+    color: $titleColor;
+    box-shadow: 0 -5px 3px -3px rgba(0, 0, 0, 0.266), 0 5px 3px -3px rgba(0, 0, 0, 0.266);
+    background-color: rgba($color: #a09e9e1e, $alpha: 0.2);
+
+    .title {
+        display: flex;
+        font-weight: 700;
+        text-align: center;
+        
+    } 
+    
+    .author {
+        display: flex;
+        font-style: italic;
+    }
+    svg {
+        margin-top: 5px;
+        color: #cb997e;
+    }
+    
+}

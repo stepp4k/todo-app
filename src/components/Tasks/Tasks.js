@@ -1,6 +1,7 @@
 import React from "react";
 import uuid from 'react-uuid';
 import Task from './Task/Task';
+import './Tasks.scss';
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -51,8 +52,6 @@ class Tasks extends React.Component {
                         }
                     )}
                 </div>
-                <hr />
-                <hr />
                 <button onClick={this.handleClearTasks}>Clear Tasks</button>
             </div>
         );
