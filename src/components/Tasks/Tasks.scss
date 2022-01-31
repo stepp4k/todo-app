@@ -1,0 +1,15 @@
+.tasks {
+    h2 {
+        font-weight: 400 !important;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .clear {
+            padding: 5px;
+            
+        }
+    }
+}

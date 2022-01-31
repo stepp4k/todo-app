@@ -41,7 +41,7 @@ class Tasks extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="tasks">
                 <h2>These are the tasks:</h2>
                 <div>
                     {this.state.tasks.map(
@@ -52,7 +52,9 @@ class Tasks extends React.Component {
                         }
                     )}
                 </div>
-                <button onClick={this.handleClearTasks}>Clear Tasks</button>
+                <div className="buttonContainer">
+                    <button className='clear btn btn-outline-primary' onClick={this.handleClearTasks}>Clear Tasks</button>
+                </div>
             </div>
         );
     };
