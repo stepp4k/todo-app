@@ -40,7 +40,19 @@ class Tasks extends React.Component {
     }
 
     handleStatusChange = (id) => {
-        alert(id);
+        let currentTasks = this.state.tasks;
+        for (let task of currentTasks) {
+            if (task.id === id) {
+                task.done = !task.done;
+            }
+        }
+        this.setState({ tasks: currentTasks });
+    }
+
+    handleRemoveChange = (id) => {
+        let currentTasks = this.state.tasks.filter(item => item.id !== id);
+        this.setState({ tasks: currentTasks })
+
     }
 
     render() {
@@ -54,7 +66,8 @@ class Tasks extends React.Component {
                                 <Task
                                     key={index}
                                     task={task}
-                                    handleStatusChange={this.handleStatusChange} />
+                                    handleStatusChange={this.handleStatusChange}
+                                    handleRemoveChange={this.handleRemoveChange} />
                             );
                         }
                     )}

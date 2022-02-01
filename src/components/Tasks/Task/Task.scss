@@ -3,12 +3,55 @@
     margin-bottom: 10px;
     margin-right: 5%;
     background-color: #e2eafc !important;
+    //animation: zoom forwards 0.7s ease-out 1;
+    
     h3 {
         font-weight: 350;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start !important;
+        button {
+            margin-right: 10px;
+            transition-duration: 300ms;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
     }
 }
 
 h2 {
     margin-left: 5%;
     font-weight: 400 !important;
+}
+
+.statusCompleted {
+    color: rgba($color: #008a0b52, $alpha: 0.8);
+}
+
+.statusOpen {
+    color: rgba($color: #ff000052, $alpha: 0.8);
+}
+
+@keyframes zoom { 
+  0% {
+    transform: scale(1);
+    width: 250px;
+    min-width: 250px;
+    opacity: 1;
+    transform-origin: 125px 125px;
+  }
+  50% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    width: 0;
+    min-width: 0;
+    transform: scale(0);
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+  }
 }
