@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Tasks from "./components/Tasks/Tasks";
-
 import MainMenu from './components/MainMenu/MainMenu';
+import Help from "./components/Help/Help";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Header />
       <MainMenu />
       <Tasks />
+      <Help />
     </div>
   );
 }
