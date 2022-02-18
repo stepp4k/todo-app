@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import uuid from 'react-uuid';
 import Task from './Task/Task';
 import './Tasks.scss';
-import Form from "./Form/Form";
+import Form from './Form/Form';
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -56,9 +56,13 @@ class Tasks extends React.Component {
 
     }
 
+    addTask = (task) => {
+        this.setState({ tasks: [...this.state.tasks, task] })
+    }
+
     render() {
         return (
-            <div className="tasks">
+            <div className='tasks'>
                 <h2>These are the tasks:</h2>
                 <div>
                     {this.state.tasks.map(
@@ -68,18 +72,22 @@ class Tasks extends React.Component {
                                     key={index}
                                     task={task}
                                     handleStatusChange={this.handleStatusChange}
-                                    handleRemoveChange={this.handleRemoveChange} />
+                                    handleRemoveChange={this.handleRemoveChange}
+
+                                />
                             );
                         }
                     )}
 
                 </div>
 
-                <div className="buttonContainer">
+                <div className='buttonContainer'>
                     <button className='clear btn btn-outline-primary' onClick={this.handleClearTasks}>Clear Tasks</button>
                 </div>
-                <div className="form">
-                    <Form />
+                <div className='form'>
+                    <Form
+                        addTask={this.addTask}
+                    />
                 </div>
             </div>
         );
