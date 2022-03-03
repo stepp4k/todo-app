@@ -1,10 +1,22 @@
-form {
-    margin-left: 5%;
-    label {
-        display: block;
-        margin-top: 10px;
-        span {
-            margin-right: 5px;
+.addTask {
+    margin: 0 5%;
+    form {
+        label {
+            display: block;
+            margin-top: 10px;
+
+            button {
+                width: 100%;
+            }
+            span {
+                margin-right: 5px;
+            }
         }
     }
+}
+
+.input-group-text {
+    width: 20%;
+    justify-content: center;
+    background-color: #ccdbfd !important;
 }

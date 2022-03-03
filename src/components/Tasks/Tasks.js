@@ -29,8 +29,18 @@ class Tasks extends React.Component {
             {
                 id: uuid(),
                 description: 'Apply at Northern.co for Entry Web Developer position',
+                done: true
+            },
+            {
+                id: uuid(),
+                description: 'Do screening call with Northern.co',
+                done: true
+            },
+            {
+                id: uuid(),
+                description: 'Waiting for feedback :-)',
                 done: false
-            }
+            },
         ];
 
         this.setState({ tasks: tasks });

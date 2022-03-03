@@ -1,0 +1,17 @@
+.nav-bar {
+    background-color: #ccdafd;
+    margin: 0 5%;
+    display: flex;
+    a {
+        color: #3b65ad;
+        text-decoration: none;
+        display: block;
+        padding: 0 20px;
+        line-height: 40px;
+
+        &:hover {
+            background-color: #edf2fb;
+            color: #000;
+        }
+    }
+}

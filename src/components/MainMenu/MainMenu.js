@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import './MainMenu.scss';
 
 function MainMenu() {
     return (
-        <nav>
-            <Link to='/'>Tasks</Link>
-            <Link to='/help'>Help</Link>
+        <nav className='nav-bar'>
+            <NavLink to='/'>Tasks</NavLink>
+            <NavLink to='/help'>Help</NavLink>
         </nav>
     );
 }
