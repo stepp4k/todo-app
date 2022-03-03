@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
 import './Form.scss';
 
@@ -28,7 +29,7 @@ export default class Form extends React.Component {
 
         // Validating input
         if (this.state.description === '') {
-            this.setState({ errorMessage: 'Enter description first' })
+            this.setState({ errorMessage: 'please enter description first' })
         } else {
             // Handling submission
             let newTask = {
@@ -53,18 +54,21 @@ export default class Form extends React.Component {
                 <h2>Add a new task:</h2>
                 <form onSubmit={this.handleSubmitForm}>
                     {this.state.errorMessage &&
-                        <div className="error" style={{ color: '#dc3545' }}>
-                            Oops: {this.state.errorMessage}
+                        <div className="alert alert-warning">
+                            Oops: {this.state.errorMessage}. Check our <Link className='alert-link' to='/help'><strong>help</strong></Link> page for more.
                         </div>
                     }
+
                     {/* <label>
                         <span>Description:</span>
                         <input type='type' maxLength={150} onChange={this.handleDescriptionChange} value={this.state.description}></input>
                     </label> */}
+                    
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="inputGroup-sizing-default">Description</span>
                         <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" maxLength={150} onChange={this.handleDescriptionChange} value={this.state.description} />
                     </div>
+
                     {/* <label>
                         <span>Status:</span>
                         <select onChange={this.handleStatusChange} value={this.state.done}>
@@ -72,6 +76,7 @@ export default class Form extends React.Component {
                             <option value={false}>Open</option>
                         </select>
                     </label> */}
+
                     <div>
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="inputGroup-sizing-default">Status</span>

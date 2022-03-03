@@ -1,5 +1,6 @@
 .addTask {
     margin: 0 5%;
+    border-radius: 10px;
     form {
         label {
             display: block;
@@ -19,4 +20,8 @@
     width: 20%;
     justify-content: center;
     background-color: #ccdbfd !important;
+}
+
+.alert {
+    border-radius: 10px !important;
 }
