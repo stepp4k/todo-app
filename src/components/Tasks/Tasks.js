@@ -1,19 +1,13 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import Task from './Task/Task';
 import './Tasks.scss';
 import Form from './Form/Form';
 
-class Tasks extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Tasks() {
+    const [tasks, setTasks] = useState([]);
 
-        this.state = {
-            tasks: []
-        }
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         const tasks = [
             {
                 id: uuid(),
@@ -38,70 +32,67 @@ class Tasks extends React.Component {
             },
             {
                 id: uuid(),
-                description: 'Waiting for feedback :-)',
-                done: false
+                description: 'Do technical challenge from Northern',
+                done: true
             },
-        ];
+            {
+                id: uuid(),
+                description: 'Keep waiting for feedback :-)',
+                done: false
+            }
+        ]
+        setTasks(tasks);
+    }, []);
 
-        this.setState({ tasks: tasks });
+    const handleClearTasks = () => {
+        setTasks([]);
     }
 
-    handleClearTasks = () => {
-        this.setState({ tasks: [] });
-    }
-
-    handleStatusChange = (id) => {
-        let currentTasks = this.state.tasks;
+    const handleStatusChange = (id) => {
+        let currentTasks = [...tasks];
         for (let task of currentTasks) {
             if (task.id === id) {
                 task.done = !task.done;
             }
         }
-        this.setState({ tasks: currentTasks });
+        setTasks(currentTasks);
     }
 
-    handleRemoveChange = (id) => {
-        let currentTasks = this.state.tasks.filter(item => item.id !== id);
-        this.setState({ tasks: currentTasks })
-
+    const handleRemoveChange = (id) => {
+        let currentTasks = tasks.filter(item => item.id !== id);
+        setTasks(currentTasks);
+    }
+    const addTask = (task) => {
+        setTasks([...tasks, task]);
     }
 
-    addTask = (task) => {
-        this.setState({ tasks: [...this.state.tasks, task] })
-    }
+    return (
+        <div className='tasks'>
+            <h2>These are the tasks:</h2>
+            <div>
+                {tasks.map(
+                    (task, index) => {
+                        return (
+                            <Task
+                                key={index}
+                                task={task}
+                                handleStatusChange={handleStatusChange}
+                                handleRemoveChange={handleRemoveChange}
 
-    render() {
-        return (
-            <div className='tasks'>
-                <h2>These are the tasks:</h2>
-                <div>
-                    {this.state.tasks.map(
-                        (task, index) => {
-                            return (
-                                <Task
-                                    key={index}
-                                    task={task}
-                                    handleStatusChange={this.handleStatusChange}
-                                    handleRemoveChange={this.handleRemoveChange}
-
-                                />
-                            );
-                        }
-                    )}
-
-                </div>
-
-                <div className='buttonContainer'>
-                    <button className='clear btn btn-outline-primary' onClick={this.handleClearTasks}>Clear Tasks</button>
-                </div>
-                <div className='form'>
-                    <Form
-                        addTask={this.addTask}
-                    />
-                </div>
+                            />
+                        );
+                    }
+                )}
             </div>
-        );
-    };
-}
 
-export default Tasks;
+            <div className='buttonContainer'>
+                <button className='clear btn btn-outline-primary' onClick={handleClearTasks}>Clear Tasks</button>
+            </div>
+            <div className='form'>
+                <Form
+                    addTask={addTask}
+                />
+            </div>
+        </div>
+    );
+}
