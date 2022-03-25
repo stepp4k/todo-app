@@ -4,8 +4,13 @@ import Task from './Task/Task';
 import './Tasks.scss';
 import Form from './Form/Form';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setTasks, clearTasks } from './../../redux/tasksSlice';
+
+
 export default function Tasks() {
-    const [tasks, setTasks] = useState([]);
+    const tasks = useSelector((state) => state.tasks.list);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const tasks = [
@@ -41,30 +46,13 @@ export default function Tasks() {
                 done: false
             }
         ]
-        setTasks(tasks);
+        dispatch(setTasks(tasks));
     }, []);
 
     const handleClearTasks = () => {
-        setTasks([]);
+        dispatch(clearTasks());
     }
 
-    const handleStatusChange = (id) => {
-        let currentTasks = [...tasks];
-        for (let task of currentTasks) {
-            if (task.id === id) {
-                task.done = !task.done;
-            }
-        }
-        setTasks(currentTasks);
-    }
-
-    const handleRemoveChange = (id) => {
-        let currentTasks = tasks.filter(item => item.id !== id);
-        setTasks(currentTasks);
-    }
-    const addTask = (task) => {
-        setTasks([...tasks, task]);
-    }
 
     return (
         <div className='tasks'>
@@ -76,9 +64,6 @@ export default function Tasks() {
                             <Task
                                 key={index}
                                 task={task}
-                                handleStatusChange={handleStatusChange}
-                                handleRemoveChange={handleRemoveChange}
-
                             />
                         );
                     }
@@ -89,9 +74,7 @@ export default function Tasks() {
                 <button className='clear btn btn-outline-primary' onClick={handleClearTasks}>Clear Tasks</button>
             </div>
             <div className='form'>
-                <Form
-                    addTask={addTask}
-                />
+                <Form />
             </div>
         </div>
     );

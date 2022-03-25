@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
 import './Form.scss';
 
+import { addTask } from '../../../redux/tasksSlice';
+import { useDispatch } from 'react-redux';
+
 export default function Form(props) {
+    const dispatch = useDispatch();
+
     const [description, setDescription] = useState('');
     const [done, setDone] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -32,7 +37,7 @@ export default function Form(props) {
                 done: done
             }
 
-            props.addTask(newTask);
+            dispatch(addTask(newTask));
 
             setDescription('');
             setDone(false);
