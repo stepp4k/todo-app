@@ -7,55 +7,48 @@ import Form from './Form/Form';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTasks, clearTasks } from './../../redux/tasksSlice';
 
+import api from '../../api'
+
 
 export default function Tasks() {
     const tasks = useSelector((state) => state.tasks.list);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const tasks = [
-            {
-                id: uuid(),
-                description: 'Start learning React',
-                done: true
-            },
+    const [loading, setLoading] = useState(true);
 
-            {
-                id: uuid(),
-                description: 'Update Resume',
-                done: true
-            },
-            {
-                id: uuid(),
-                description: 'Apply at Northern.co for Entry Web Developer position',
-                done: true
-            },
-            {
-                id: uuid(),
-                description: 'Do screening call with Northern.co',
-                done: true
-            },
-            {
-                id: uuid(),
-                description: 'Do technical challenge from Northern',
-                done: true
-            },
-            {
-                id: uuid(),
-                description: 'Keep waiting for feedback :-)',
-                done: false
-            }
-        ]
-        dispatch(setTasks(tasks));
+    useEffect(() => {
+        api.get('/tasks')
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch(setTasks(response.data));
+                    console.log('Tasks received from API')
+                    setLoading(false);
+                }
+            })
+
     }, []);
 
     const handleClearTasks = () => {
-        dispatch(clearTasks());
+        api.delete('/tasks/all')
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch(clearTasks());
+                }
+            })
     }
 
 
     return (
         <div className='tasks'>
+
+            {loading && (
+                <div className="overlay">
+                    <div className="overlay__wrapper">Loading
+                        <div className="overlay__spinner"></div>
+                    </div>
+                </div>
+            )}
+
             <h2>These are the tasks:</h2>
             <div>
                 {tasks.map(

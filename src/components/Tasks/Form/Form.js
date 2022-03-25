@@ -6,12 +6,15 @@ import './Form.scss';
 import { addTask } from '../../../redux/tasksSlice';
 import { useDispatch } from 'react-redux';
 
+import api from '../../../api';
+
 export default function Form(props) {
     const dispatch = useDispatch();
 
     const [description, setDescription] = useState('');
     const [done, setDone] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [saving, setSaving] = useState(false);
 
     const handleDescriptionChange = (e) => {
         //console.log(e.target.value);
@@ -36,12 +39,22 @@ export default function Form(props) {
                 description: description,
                 done: done
             }
+            setSaving(true);
 
-            dispatch(addTask(newTask));
+            api.post('/tasks', newTask)
+                .then((response) => {
+                    if (response.status === 201) {
+                        dispatch(addTask(newTask));
+                        setDescription('');
+                        setDone(false);
+                        setErrorMessage(null);
 
-            setDescription('');
-            setDone(false);
-            setErrorMessage(null);
+                        setSaving(false);
+                    }
+                })
+
+
+
         }
     }
     return (
@@ -67,7 +80,12 @@ export default function Form(props) {
                     </div>
                 </div>
                 <label>
-                    <button className="btn btn-primary" type='submit'>Add Task</button>
+                    {saving && (
+                        <button className="btn btn-primary saving" type='submit' disabled>Saving...</button>
+                    )}
+                    {!saving && (
+                        <button className="btn btn-primary" type='submit'>Add Task</button>
+                    )}
                 </label>
             </form>
         </div>

@@ -25,3 +25,17 @@
 .alert {
     border-radius: 10px !important;
 }
+
+.saving {
+    animation-name: jump;
+    animation-duration: 0.5s;
+}
+
+@keyframes jump {
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
